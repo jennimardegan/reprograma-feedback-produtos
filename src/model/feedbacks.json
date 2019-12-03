@@ -1,0 +1,20 @@
+[
+  {
+    "feedback": "Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.",
+    "nota": 3.5,
+    "numPedido":17,
+    "cliente": [
+      {
+        "nome": "Jennifer Mardegan",
+        "dataNascimento": "01/26/1988",
+        "cidade": "São Paulo"
+      }
+    ],
+    "produto": [
+      {
+        "tipo": "Geladeira",
+        "modelo": "Brastemp BRM45H"
+      }
+    ]
+  }
+]
