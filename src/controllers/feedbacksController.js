@@ -26,18 +26,6 @@ exports.getById = (req, res) => {
   }
 
 
-//Trazer do banco todos os feedbacks de um determinado tipo de produto
-exports.getProduto = (req, res) => {
-  const tipoProduto = req.params.tipo
-  
-  Feedbacks.find(function (err, feedbacks) {
-    if (err) res.status(500).send(err);
-
-    res.status(200).send(feedbacks.produto.tipo)
-  })
-}
-
-
 //POST para incluir uma feedback no banco
 exports.post = (req, res) => { 
   let feedback = new Feedbacks(req.body);
