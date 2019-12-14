@@ -3,182 +3,221 @@ const router = express.Router()
 const controller = require("../controllers/feedbacksController")
 const authMiddleware = require('../middleware/auth')
 
-//fazer essa template para cada rota
+// apidoc -i ./src
+
 /**
- * @api {get} /feedbacks Requisição de todos os feedbacks cadastrados no banco de dados MongoDB
+ * @api {get} /feedbacks
  * @apiName GetTodos
  * @apiGroup 1. Busca Feedbacks
  *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
- *
+ * @apiSuccess {String} _id ID do banco de dados MongoDB
+ * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
+ * @apiSuccess {Number} nota Nota dada ao produto pelo cliente, de 0 a 5
+ * @apiSuccess {Number} numPedido Número do pedido dentro do site de compras
+ * @apiSuccess {Object[]} cliente Informações do cliente (nome, data de nascimento, cidade)
+ * @apiSuccess {Object[]} produto Informações do produto (tipo, modelo)
+ * @apiSuccess {Object[]} sentimentos Sentimentos identificados no texto do feedback
+ * 
  * @apiSuccessExample Success-Response:
- *     HTTP 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+ *{
+ *      "_id": "5ddd541cf1850b51d8ed74ca",
+ *      "feedback": "Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.",
+ *      "nota": 3.5,
+ *      "numPedido": 17,
+ *      "cliente": [
+ *          {
+ *              "nome": "Jennifer Mardegan",
+ *              "dataNascimento": "1988-01-26T02:00:00.000Z",
+ *              "cidade": "São Paulo"
+ *          }
+ *      ],
+ *      "produto": [
+ *          {
+ *              "tipo": "Geladeira",
+ *              "modelo": "Brastemp BRM45H"
+ *          }
+ *      ],
+ *      "sentimentos": [
+ *          "alegria",
+ *          "confiante",
+ *          "analitico",
+ *          "tristeza"
+ *      ]
+ *  }
  */
 router.get("/", controller.getTodos)
+
 /**
- * @api {get} /feedbacks/:id Requisição de um feedback específico cadastrado no banco de dados MongoDB
+ * @api {get} /feedbacks/:id
  * @apiName GetById
  * @apiGroup 2. Busca Feedbacks por ID
  *
- * @apiParam {Number} id ID único do usuário referente a sua identificação no banco de dados MongoDB
+ * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} _id ID do banco de dados MongoDB (parâmetro de filtro)
+ * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
+ * @apiSuccess {Number} nota Nota dada ao produto pelo cliente, de 0 a 5
+ * @apiSuccess {Number} numPedido Número do pedido dentro do site de compras
+ * @apiSuccess {Object[]} cliente Informações do cliente (nome, data de nascimento, cidade)
+ * @apiSuccess {Object[]} produto Informações do produto (tipo, modelo)
+ * @apiSuccess {Object[]} sentimentos Sentimentos identificados no texto do feedback
  *
- * @apiSuccessExample Success-Response:
- *     HTTP 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
+  * @apiSuccessExample Success-Response:
+ *{
+ *      "_id": "5ddd541cf1850b51d8ed74ca",
+ *      "feedback": "Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.",
+ *      "nota": 3.5,
+ *      "numPedido": 17,
+ *      "cliente": [
+ *          {
+ *              "nome": "Jennifer Mardegan",
+ *              "dataNascimento": "1988-01-26T02:00:00.000Z",
+ *              "cidade": "São Paulo"
+ *          }
+ *      ],
+ *      "produto": [
+ *          {
+ *              "tipo": "Geladeira",
+ *              "modelo": "Brastemp BRM45H"
+ *          }
+ *      ],
+ *      "sentimentos": [
+ *          "alegria",
+ *          "confiante",
+ *          "analitico",
+ *          "tristeza"
+ *      ]
+ *  }
  *
- * @apiError UserNotFound The id of the User was not found.
+ * @apiError FeedbackNotFound O ID não foi localizado.
  *
  * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+ *  {
+ *      "message": "ID não localizado: ${feedbackId}"
+ *  }
+ *      
  */
 router.get("/:id", controller.getById)
+
 /**
- * @api {get} /feedbacks/sentimento/:sentimento Requisição de feedbacks que possuem um sentimento específico
+ * @api {get} /feedbacks/sentimento/:sentimento
  * @apiName GetSentimento
  * @apiGroup 3. Busca Feedbacks por sentimento
  *
- * @apiParam {Number} id Users unique ID.
+ * @apiParam {String} sentimento Sentimento específico para filtro do relatório 
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} _id ID do banco de dados MongoDB (parâmetro de filtro)
+ * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
+ * @apiSuccess {Number} nota Nota dada ao produto pelo cliente, de 0 a 5
+ * @apiSuccess {Number} numPedido Número do pedido dentro do site de compras
+ * @apiSuccess {Object[]} cliente Informações do cliente (nome, data de nascimento, cidade)
+ * @apiSuccess {Object[]} produto Informações do produto (tipo, modelo)
+ * @apiSuccess {Object[]} sentimentos Sentimentos identificados no texto do feedback (incluindo parâmetro)
  *
  * @apiSuccessExample Success-Response:
- *     HTTP 200 OK
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+*{
+ *      "_id": "5ddd541cf1850b51d8ed74ca",
+ *      "feedback": "Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.",
+ *      "nota": 3.5,
+ *      "numPedido": 17,
+ *      "cliente": [
+ *          {
+ *              "nome": "Jennifer Mardegan",
+ *              "dataNascimento": "1988-01-26T02:00:00.000Z",
+ *              "cidade": "São Paulo"
+ *          }
+ *      ],
+ *      "produto": [
+ *          {
+ *              "tipo": "Geladeira",
+ *              "modelo": "Brastemp BRM45H"
+ *          }
+ *      ],
+ *      "sentimentos": [
+ *          "alegria",
+ *          "confiante",
+ *          "analitico",
+ *          "tristeza"
+ *      ]
+ *  }
  */
 router.get("/sentimento/:sentimento", controller.getSentimento)
 
-/**
- * @api {auth} / Autenticação de usuario
- * @apiName authMiddleware
- * @apiGroup User
- *
- * @apiParam {String} email Email do usuário.
- * @apiParam {String} senha Senha do usuário.
- *
- * @apiSuccess {String} Token Token da senha do usuário.
- *
- * @apiSuccessExample Success-Response:
- *     HTTP/1.1 200 OK
- *     {
- *        "user": {},
- *        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzYyNTE2NDQsImV4cCI6MTU3NjUxMDg0NH0.X1hjAtk_hyPnU8BKjw5gk90Z4Uy72xd166K6N8F583M"
- *     }
- *
- */
 router.use(authMiddleware)
 
 /**
- * @api {post} /feedbacks Inclui um novo cadastro de feedback no banco de dados MongoDB
+ * @api {post} /feedbacks
  * @apiName Post
- * @apiGroup 4. Inclui Feedback
+ * @apiGroup 4. Inclui novo Feedback
  *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} _id ID do banco de dados MongoDB (parâmetro de filtro)
+ * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
+ * @apiSuccess {Number} nota Nota dada ao produto pelo cliente, de 0 a 5
+ * @apiSuccess {Number} numPedido Número do pedido dentro do site de compras
+ * @apiSuccess {Object[]} cliente Informações do cliente (nome, data de nascimento, cidade)
+ * @apiSuccess {Object[]} produto Informações do produto (tipo, modelo)
+ * @apiSuccess {Object[]} sentimentos Sentimentos identificados no texto do feedback
  *
  * @apiSuccessExample Success-Response:
- *     HTTP 201 Created
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+ * {
+ *       "_id": "5df44754c01f4f5fe47e9b9e",
+ *       "feedback": "O produto parece muito bem acabado. Só achei estranho o barulho quando a base é levantada. O pedido demorou muito tempo para chegar.",
+ *       "nota": 4,
+ *       "numPedido": 78,
+ *       "cliente": [
+ *           {
+ *               "nome": "José Zanforlin",
+ *               "dataNascimento": "1987-12-01T02:00:00.000Z",
+ *               "cidade": "São Paulo"
+ *           }
+ *       ],
+ *       "produto": [
+ *           {
+ *               "tipo": "Batedeira",
+ *               "modelo": "KitchenAid Artisan"
+ *           }
+ *       ],
+ *       "sentimentos": [
+ *           "medo",
+ *           "analitico"
+ *       ]
+ *   }
  */
 router.post("/", controller.post)
+
 /**
- * @api {put} /feedbacks/:id Alteração do cadastro de um feedback específico no banco de dados MongoDB
+ * @api {put} /feedbacks/:id
  * @apiName UpdateFeedback
- * @apiGroup 5. Altera Feedback
+ * @apiGroup 5. Atualiza Feedback
  *
- * @apiParam {Number} id Users unique ID.
+ * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiSuccess {String} _id ID do banco de dados MongoDB (parâmetro de filtro)
+ * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
+ * @apiSuccess {Number} nota Nota dada ao produto pelo cliente, de 0 a 5
+ * @apiSuccess {Number} numPedido Número do pedido dentro do site de compras
+ * @apiSuccess {Object[]} cliente Informações do cliente (nome, data de nascimento, cidade)
+ * @apiSuccess {Object[]} produto Informações do produto (tipo, modelo)
+ * @apiSuccess {Object[]} sentimentos Sentimentos identificados no texto do feedback
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 204 No content
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+ * {
+ *      "message": "Feedback atualizado com sucesso!"
+ * }
  */
 router.put("/:id", controller.updateFeedback)
+
 /**
- * @api {delete} /feedbacks/:id Exclui um feedback específico do banco de dados MongoDB
+ * @api {delete} /feedbacks/:id
  * @apiName DeleteFeedback
  * @apiGroup 6. Exclui Feedback
  *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {String} firstname Firstname of the User.
- * @apiSuccess {String} lastname  Lastname of the User.
+ * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *
  * @apiSuccessExample Success-Response:
- *     HTTP/1.1 204 No content
- *     {
- *       "firstname": "John",
- *       "lastname": "Doe"
- *     }
- *
- * @apiError UserNotFound The id of the User was not found.
- *
- * @apiErrorExample Error-Response:
- *     HTTP 500 Internal Server Error
- *     {
- *       "error": "UserNotFound"
- *     }
+ * {
+ *      "message": "Feedback removido com sucesso!"
+ * }
  */
 router.delete("/:id", controller.deleteFeedback)
 

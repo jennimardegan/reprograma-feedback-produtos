@@ -6,7 +6,11 @@ const bodyParser = require('body-parser')
 const app = express()
 
 //conexão com o MongoDB local
-mongoose.connect("mongodb://localhost:27017/reprograma", {useNewUrlParser:true, useUnifiedTopology:true});
+mongoose.connect("mongodb://localhost:27017/reprograma", {
+  useNewUrlParser:true, 
+  useUnifiedTopology:true,
+  useCreateIndex: true
+});
 
 let db = mongoose.connection;
 db.on("error", console.log.bind(console, "Connection error:"))

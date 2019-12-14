@@ -2,22 +2,9 @@ define({ "api": [
   {
     "type": "get",
     "url": "/feedbacks",
-    "title": "Requisição de todos os feedbacks cadastrados no banco de dados MongoDB",
+    "title": "",
     "name": "GetTodos",
     "group": "1__Busca_Feedbacks",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
-          }
-        ]
-      }
-    },
     "success": {
       "fields": {
         "Success 200": [
@@ -25,41 +12,57 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "feedback",
+            "description": "<p>Texto do cliente referente à sua opinião do produto</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nota",
+            "description": "<p>Nota dada ao produto pelo cliente, de 0 a 5</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "numPedido",
+            "description": "<p>Número do pedido dentro do site de compras</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "cliente",
+            "description": "<p>Informações do cliente (nome, data de nascimento, cidade)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "produto",
+            "description": "<p>Informações do produto (tipo, modelo)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "sentimentos",
+            "description": "<p>Sentimentos identificados no texto do feedback</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n     \"_id\": \"5ddd541cf1850b51d8ed74ca\",\n     \"feedback\": \"Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.\",\n     \"nota\": 3.5,\n     \"numPedido\": 17,\n     \"cliente\": [\n         {\n             \"nome\": \"Jennifer Mardegan\",\n             \"dataNascimento\": \"1988-01-26T02:00:00.000Z\",\n             \"cidade\": \"São Paulo\"\n         }\n     ],\n     \"produto\": [\n         {\n             \"tipo\": \"Geladeira\",\n             \"modelo\": \"Brastemp BRM45H\"\n         }\n     ],\n     \"sentimentos\": [\n         \"alegria\",\n         \"confiante\",\n         \"analitico\",\n         \"tristeza\"\n     ]\n }",
           "type": "json"
         }
       ]
@@ -71,7 +74,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/feedbacks/:id",
-    "title": "Requisição de um feedback específico cadastrado no banco de dados MongoDB",
+    "title": "",
     "name": "GetById",
     "group": "2__Busca_Feedbacks_por_ID",
     "parameter": {
@@ -81,8 +84,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>ID único do usuário referente a sua identificação no banco de dados MongoDB</p>"
+            "field": "_id",
+            "description": "<p>ID único do feedback referente a sua identificação no banco de dados MongoDB</p>"
           }
         ]
       }
@@ -94,22 +97,57 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB (parâmetro de filtro)</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "feedback",
+            "description": "<p>Texto do cliente referente à sua opinião do produto</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nota",
+            "description": "<p>Nota dada ao produto pelo cliente, de 0 a 5</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "numPedido",
+            "description": "<p>Número do pedido dentro do site de compras</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "cliente",
+            "description": "<p>Informações do cliente (nome, data de nascimento, cidade)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "produto",
+            "description": "<p>Informações do produto (tipo, modelo)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "sentimentos",
+            "description": "<p>Sentimentos identificados no texto do feedback</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
+          "content": "{\n     \"_id\": \"5ddd541cf1850b51d8ed74ca\",\n     \"feedback\": \"Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.\",\n     \"nota\": 3.5,\n     \"numPedido\": 17,\n     \"cliente\": [\n         {\n             \"nome\": \"Jennifer Mardegan\",\n             \"dataNascimento\": \"1988-01-26T02:00:00.000Z\",\n             \"cidade\": \"São Paulo\"\n         }\n     ],\n     \"produto\": [\n         {\n             \"tipo\": \"Geladeira\",\n             \"modelo\": \"Brastemp BRM45H\"\n         }\n     ],\n     \"sentimentos\": [\n         \"alegria\",\n         \"confiante\",\n         \"analitico\",\n         \"tristeza\"\n     ]\n }",
           "type": "json"
         }
       ]
@@ -120,15 +158,15 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
+            "field": "FeedbackNotFound",
+            "description": "<p>O ID não foi localizado.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n    \"message\": \"ID não localizado: ${feedbackId}\"\n}",
           "type": "json"
         }
       ]
@@ -140,7 +178,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/feedbacks/sentimento/:sentimento",
-    "title": "Requisição de feedbacks que possuem um sentimento específico",
+    "title": "",
     "name": "GetSentimento",
     "group": "3__Busca_Feedbacks_por_sentimento",
     "parameter": {
@@ -148,10 +186,10 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
+            "field": "sentimento",
+            "description": "<p>Sentimento específico para filtro do relatório</p>"
           }
         ]
       }
@@ -163,41 +201,57 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB (parâmetro de filtro)</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "feedback",
+            "description": "<p>Texto do cliente referente à sua opinião do produto</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nota",
+            "description": "<p>Nota dada ao produto pelo cliente, de 0 a 5</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "numPedido",
+            "description": "<p>Número do pedido dentro do site de compras</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "cliente",
+            "description": "<p>Informações do cliente (nome, data de nascimento, cidade)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "produto",
+            "description": "<p>Informações do produto (tipo, modelo)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "sentimentos",
+            "description": "<p>Sentimentos identificados no texto do feedback (incluindo parâmetro)</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n     \"_id\": \"5ddd541cf1850b51d8ed74ca\",\n     \"feedback\": \"Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.\",\n     \"nota\": 3.5,\n     \"numPedido\": 17,\n     \"cliente\": [\n         {\n             \"nome\": \"Jennifer Mardegan\",\n             \"dataNascimento\": \"1988-01-26T02:00:00.000Z\",\n             \"cidade\": \"São Paulo\"\n         }\n     ],\n     \"produto\": [\n         {\n             \"tipo\": \"Geladeira\",\n             \"modelo\": \"Brastemp BRM45H\"\n         }\n     ],\n     \"sentimentos\": [\n         \"alegria\",\n         \"confiante\",\n         \"analitico\",\n         \"tristeza\"\n     ]\n }",
           "type": "json"
         }
       ]
@@ -209,22 +263,9 @@ define({ "api": [
   {
     "type": "post",
     "url": "/feedbacks",
-    "title": "Inclui um novo cadastro de feedback no banco de dados MongoDB",
+    "title": "",
     "name": "Post",
-    "group": "4__Inclui_Feedback",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Number",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
-          }
-        ]
-      }
-    },
+    "group": "4__Inclui_novo_Feedback",
     "success": {
       "fields": {
         "Success 200": [
@@ -232,55 +273,71 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB (parâmetro de filtro)</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "feedback",
+            "description": "<p>Texto do cliente referente à sua opinião do produto</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nota",
+            "description": "<p>Nota dada ao produto pelo cliente, de 0 a 5</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "numPedido",
+            "description": "<p>Número do pedido dentro do site de compras</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "cliente",
+            "description": "<p>Informações do cliente (nome, data de nascimento, cidade)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "produto",
+            "description": "<p>Informações do produto (tipo, modelo)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "sentimentos",
+            "description": "<p>Sentimentos identificados no texto do feedback</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n      \"_id\": \"5df44754c01f4f5fe47e9b9e\",\n      \"feedback\": \"O produto parece muito bem acabado. Só achei estranho o barulho quando a base é levantada. O pedido demorou muito tempo para chegar.\",\n      \"nota\": 4,\n      \"numPedido\": 78,\n      \"cliente\": [\n          {\n              \"nome\": \"José Zanforlin\",\n              \"dataNascimento\": \"1987-12-01T02:00:00.000Z\",\n              \"cidade\": \"São Paulo\"\n          }\n      ],\n      \"produto\": [\n          {\n              \"tipo\": \"Batedeira\",\n              \"modelo\": \"KitchenAid Artisan\"\n          }\n      ],\n      \"sentimentos\": [\n          \"medo\",\n          \"analitico\"\n      ]\n  }",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "4__Inclui_Feedback"
+    "groupTitle": "4__Inclui_novo_Feedback"
   },
   {
     "type": "put",
     "url": "/feedbacks/:id",
-    "title": "Alteração do cadastro de um feedback específico no banco de dados MongoDB",
+    "title": "",
     "name": "UpdateFeedback",
-    "group": "5__Altera_Feedback",
+    "group": "5__Atualiza_Feedback",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -288,8 +345,8 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
+            "field": "_id",
+            "description": "<p>ID único do feedback referente a sua identificação no banco de dados MongoDB</p>"
           }
         ]
       }
@@ -301,53 +358,69 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB (parâmetro de filtro)</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "feedback",
+            "description": "<p>Texto do cliente referente à sua opinião do produto</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "nota",
+            "description": "<p>Nota dada ao produto pelo cliente, de 0 a 5</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "numPedido",
+            "description": "<p>Número do pedido dentro do site de compras</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "cliente",
+            "description": "<p>Informações do cliente (nome, data de nascimento, cidade)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "produto",
+            "description": "<p>Informações do produto (tipo, modelo)</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "sentimentos",
+            "description": "<p>Sentimentos identificados no texto do feedback</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n     \"message\": \"Feedback atualizado com sucesso!\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "5__Altera_Feedback"
+    "groupTitle": "5__Atualiza_Feedback"
   },
   {
     "type": "delete",
     "url": "/feedbacks/:id",
-    "title": "Exclui um feedback específico do banco de dados MongoDB",
+    "title": "",
     "name": "DeleteFeedback",
     "group": "6__Exclui_Feedback",
     "parameter": {
@@ -357,8 +430,54 @@ define({ "api": [
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Users unique ID.</p>"
+            "field": "_id",
+            "description": "<p>ID único do feedback referente a sua identificação no banco de dados MongoDB</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n     \"message\": \"Feedback removido com sucesso!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/feedbacksRoute.js",
+    "groupTitle": "6__Exclui_Feedback"
+  },
+  {
+    "type": "post",
+    "url": "/feedbacks/usuarios",
+    "title": "",
+    "name": "Post",
+    "group": "7__Cadastro_de_senha_para_usuario",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do usuario</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email do usuario</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "senha",
+            "description": "<p>Senha do usuario</p>"
           }
         ]
       }
@@ -370,47 +489,99 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "firstname",
-            "description": "<p>Firstname of the User.</p>"
+            "field": "_id",
+            "description": "<p>ID do banco de dados MongoDB</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "lastname",
-            "description": "<p>Lastname of the User.</p>"
+            "field": "nome",
+            "description": "<p>Nome do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "senha",
+            "description": "<p>Senha criptografada do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data de quando a senha foi criada</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"firstname\": \"John\",\n  \"lastname\": \"Doe\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "UserNotFound",
-            "description": "<p>The id of the User was not found.</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"UserNotFound\"\n}",
+          "content": "{\n \"_id\": \"5df3afd6951a08341830489e\",\n \"nome\": \"Jennifer Mardegan\",\n \"email\": \"jennifer_mardegan@hotmail.com\",\n \"senha\": \"$2a$10$Nhs2GquEHPp/kcP/NDu.d.ZgBEVcHVeGVtR0MIGTWL1eBZa4sGYwe\",\n \"createdAt\": \"2019-12-13T15:35:50.283Z\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "6__Exclui_Feedback"
+    "filename": "src/routes/usuariosRoute.js",
+    "groupTitle": "7__Cadastro_de_senha_para_usuario"
+  },
+  {
+    "type": "auth",
+    "url": "/feedbacks/auth",
+    "title": "",
+    "name": "authMiddleware",
+    "group": "8__Autenticacao_de_usuario",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email do usuario</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "senha",
+            "description": "<p>Senha do usuario</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "Token",
+            "description": "<p>Token da senha do usuário</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n   \"user\": {},\n   \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzYyNTE2NDQsImV4cCI6MTU3NjUxMDg0NH0.X1hjAtk_hyPnU8BKjw5gk90Z4Uy72xd166K6N8F583M\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/usuariosRoute.js",
+    "groupTitle": "8__Autenticacao_de_usuario"
   }
 ] });

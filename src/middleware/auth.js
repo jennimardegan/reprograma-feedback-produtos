@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth');
-const { promissify } = require('util');
+//const { promisify } = require('util');
 
 module.exports = (req, res, next) => {
     console.log("Middleware")
