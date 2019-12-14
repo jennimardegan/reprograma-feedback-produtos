@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const FeedbacksSchema = new mongoose.Schema({
     feedback: { type: String, required: true },
+    sentimentos: [],
     nota: { type: Number, required: true },
     numPedido: { type: Number },
     cliente: [{ _id:false, nome: String, dataNascimento: Date, cidade: String }],

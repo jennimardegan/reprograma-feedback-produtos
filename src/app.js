@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const bodyParser = require("body-parser")
+const path = require("path")
+const bodyParser = require('body-parser')
 
 const app = express()
 
@@ -16,6 +17,7 @@ db.once("open", function(){
 //rotas
 const index = require("./routes/index")
 const feedbacks = require("./routes/feedbacksRoute")
+const usuarios = require('./routes/usuariosRoute')
 
 app.use(express.json());
 
@@ -28,10 +30,16 @@ app.use(function(req, res, next) {
   next()
 })
 
-//Linha incluida no momento de incluir o POST para o MongoDB
-//app.use(bodyParser.json());
+
+app.use(express.static('doc'))
+app.get('/api-doc', (req, res) => {
+  res.sendFile( path.join(__dirname + '/../doc/index.html'));
+})
+
+app.use(bodyParser.json());
 
 app.use("/", index)
 app.use("/feedbacks", feedbacks)
+app.use('/usuarios', usuarios)
 
 module.exports = app

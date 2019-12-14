@@ -1,6 +1,6 @@
 [
   {
-    "feedback": "Produto muito bom! Usabilidade e funções ótimas, foi apenas um pouco difícil a instalação.",
+    "feedback": "Produto muito bom! Usabilidade e funções ótimas, porém foi bastante difícil a instalação.",
     "nota": 3.5,
     "numPedido":17,
     "cliente": [
@@ -18,3 +18,11 @@
     ]
   }
 ]
+
+{
+  "_id": "5df444a5d2d75348d84a2db1",
+  "nome": "Jennifer Mardegan",
+  "email": "jennifer_mardegan@hotmail.com",
+  "senha": "$2a$10$Y.XMplmAmjFPMKyd4WvB3ONSoVvNzLbLJ/wtl/.3gqp06H2iEkNf6",
+  "createdAt": "2019-12-14T02:10:45.234Z"
+}

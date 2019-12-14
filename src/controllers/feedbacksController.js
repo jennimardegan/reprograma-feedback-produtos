@@ -1,5 +1,4 @@
 const Feedbacks = require('../model/feedbacks')
-//const fs = require('fs');
 
 
 //Trazer do banco TODOS os feedbacks
@@ -26,6 +25,18 @@ exports.getById = (req, res) => {
   }
 
 
+  //Trazer do banco os feedbacks por sentimento
+  exports.getSentimento = (req, res) => {
+    const sentimentos = req.params.sentimento;
+
+    Feedbacks.find(function (err, feedbacks) {
+      if (err) res.status(500).send(err);
+      const FeedbacksComSentimento = feedbacks.filter(feedbacks => feedbacks.sentimentos.find(sent => sent == sentimentos))
+      res.status(200).send(FeedbacksComSentimento)
+    })
+  }
+
+
 //POST para incluir uma feedback no banco
 exports.post = (req, res) => { 
   let feedback = new Feedbacks(req.body);
@@ -39,7 +50,7 @@ exports.post = (req, res) => {
 
 //PUT para alterar um cadastro de feedback existente no banco
 exports.updateFeedback = (req, res) => {
-  Feedbacks.update(
+  Feedbacks.updateOne(
     {_id: req.params.id},
     {$set: req.body},
     {upsert: true},

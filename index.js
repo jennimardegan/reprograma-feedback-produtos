@@ -1,8 +1,8 @@
+//API IBM-Watson Tone Analyzer
 var ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
 const { IamAuthenticator } = require('ibm-watson/auth');
-var text = "In my younger and more vulnerable years my father gave me some advice that I’ve been" 
-+ "turning over in my mind ever since. \“Whenever you feel like criticizing any one,\” he told me," 
-+ "\“just remember that all the people in this world haven’t had the advantages that you’ve had.\"";
+
+var text = "The product looks very well finished. I just found the noise strange when the base is raised. The request took a long time to arrive.";
 
 var toneInput = { "text": text };
 var params = {
@@ -11,9 +11,9 @@ var params = {
 };
 
 const tone_analyzer = new ToneAnalyzerV3({
-  version: 'YYYY-MM-DD',
+  version: '2017-09-21',
   authenticator: new IamAuthenticator({
-    apikey: 'xxxxxxxxxxxxxxx'
+    apikey: 'HColxAttBYH9HpAJc9fsFMPq-cjptEz0B9tc7MHhiFIY'
   })
 });
 
