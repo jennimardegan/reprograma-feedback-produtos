@@ -13,7 +13,7 @@ var params = {
 const tone_analyzer = new ToneAnalyzerV3({
   version: '2017-09-21',
   authenticator: new IamAuthenticator({
-    apikey: 'HColxAttBYH9HpAJc9fsFMPq-cjptEz0B9tc7MHhiFIY'
+    apikey: 'xxxxxxxxxxxxxxxxxx'
   })
 });
 
