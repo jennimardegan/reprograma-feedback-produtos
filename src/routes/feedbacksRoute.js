@@ -8,7 +8,7 @@ const authMiddleware = require('../middleware/auth')
 /**
  * @api {get} /feedbacks
  * @apiName GetTodos
- * @apiGroup 1. Busca Feedbacks
+ * @apiGroup 01. Busca Feedbacks
  *
  * @apiSuccess {String} _id ID do banco de dados MongoDB
  * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
@@ -50,7 +50,7 @@ router.get("/", controller.getTodos)
 /**
  * @api {get} /feedbacks/:id
  * @apiName GetById
- * @apiGroup 2. Busca Feedbacks por ID
+ * @apiGroup 02. Busca Feedbacks por ID
  *
  * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *
@@ -102,7 +102,7 @@ router.get("/:id", controller.getById)
 /**
  * @api {get} /feedbacks/sentimento/:sentimento
  * @apiName GetSentimento
- * @apiGroup 3. Busca Feedbacks por sentimento
+ * @apiGroup 03. Busca Feedbacks por sentimento
  *
  * @apiParam {String} sentimento Sentimento específico para filtro do relatório 
  *
@@ -148,7 +148,7 @@ router.use(authMiddleware)
 /**
  * @api {post} /feedbacks
  * @apiName Post
- * @apiGroup 4. Inclui novo Feedback
+ * @apiGroup 04. Inclui novo Feedback
  *
  * @apiSuccess {String} _id ID do banco de dados MongoDB (parâmetro de filtro)
  * @apiSuccess {String} feedback Texto do cliente referente à sua opinião do produto
@@ -188,7 +188,7 @@ router.post("/", controller.post)
 /**
  * @api {put} /feedbacks/:id
  * @apiName UpdateFeedback
- * @apiGroup 5. Atualiza Feedback
+ * @apiGroup 05. Atualiza Feedback
  *
  * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *
@@ -210,7 +210,7 @@ router.put("/:id", controller.updateFeedback)
 /**
  * @api {delete} /feedbacks/:id
  * @apiName DeleteFeedback
- * @apiGroup 6. Exclui Feedback
+ * @apiGroup 06. Exclui Feedback
  *
  * @apiParam {Number} _id ID único do feedback referente a sua identificação no banco de dados MongoDB
  *

@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
 const authConfig = require('../config/auth');
-//const { promisify } = require('util');
+const { promisify } = require('util');
 
 module.exports = (req, res, next) => {
     console.log("Middleware")
     const authHeader = req.headers.authorization
     if (!authHeader) {
-        return res.status(401).send({ error: 'Token não fornecido!' });
+        return res.status(401).send({ error: 'Token não gerado!' });
     }
 
     const [, token] = authHeader.split(' ')
@@ -18,4 +18,4 @@ module.exports = (req, res, next) => {
     } catch (err) {
         return res.status(401).send({ error: 'Token inválido!' });
     }
-} 
+}  

@@ -8,8 +8,12 @@ Cadastro de feedbacks de produtos, com a identificação do humor de cada texto 
 #### - Javascript
 #### - NodeJS
 #### - NPM
-#### - Express.js
+#### - Express
 #### - Nodemon
+#### - Mongoose
+#### - Body-Parser
+#### - Jsonwebtoken
+#### - BcryptJS
 #### - Postman
 #### - VSCode
 #### - API IBM Watson - Tone Analyzer
@@ -18,6 +22,7 @@ Cadastro de feedbacks de produtos, com a identificação do humor de cada texto 
 ## Endpoints criados
 #### get('/')
 #### get('/:id')
+#### get('/sentimento/:sentimento')
 #### post('/')
 #### put('/:id')
 #### delete('/:id')

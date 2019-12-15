@@ -30,8 +30,7 @@ exports.post = (req, res) => {
 }
 
 function checkPassword(passwordEntry, senha) {
-    console.log(passwordEntry, 'aqui é a senha do usuário')
-    console.log(senha, 'aqui é a senha do BD')
+   
     return bcrypt.compare(passwordEntry, senha)
 }
 
@@ -43,13 +42,13 @@ exports.postAuth = async (req, res) => {
     if (!user) {
         return res.status(401).send({ error: 'Cliente não encontrado!' });
     }
-    
+
     const { id, name } = user;
 
     try {
         checkPassword(senha, user.senha);
     } catch (err) {
-        return res.status(401).send({ error: 'Senha incorreta!' });
+        return res.status(401).send({ error: 'Senha não confere!' });
     }
 
     try {
@@ -77,3 +76,18 @@ exports.get = (req, res) => {
         res.status(400).send({ message: err });
     });
 } 
+
+exports.deleteUsuarios = (req, res) => {
+    const id = req.params.id;
+    Usuarios.findById(id, function(err, usuarios){
+        if (err) res.status(500).send(err);
+
+        if(!usuarios) return res.status(200).send({message:'Infelizmente não localizamos o Id'})
+
+        usuarios.remove(function (err){
+            if(!err){
+                res.status(200).send({message: 'Usuario removido com sucesso!'})
+            }
+        })
+    })
+}

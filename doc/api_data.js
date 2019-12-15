@@ -4,7 +4,7 @@ define({ "api": [
     "url": "/feedbacks",
     "title": "",
     "name": "GetTodos",
-    "group": "1__Busca_Feedbacks",
+    "group": "01__Busca_Feedbacks",
     "success": {
       "fields": {
         "Success 200": [
@@ -69,14 +69,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "1__Busca_Feedbacks"
+    "groupTitle": "01__Busca_Feedbacks"
   },
   {
     "type": "get",
     "url": "/feedbacks/:id",
     "title": "",
     "name": "GetById",
-    "group": "2__Busca_Feedbacks_por_ID",
+    "group": "02__Busca_Feedbacks_por_ID",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -173,14 +173,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "2__Busca_Feedbacks_por_ID"
+    "groupTitle": "02__Busca_Feedbacks_por_ID"
   },
   {
     "type": "get",
     "url": "/feedbacks/sentimento/:sentimento",
     "title": "",
     "name": "GetSentimento",
-    "group": "3__Busca_Feedbacks_por_sentimento",
+    "group": "03__Busca_Feedbacks_por_sentimento",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -258,14 +258,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "3__Busca_Feedbacks_por_sentimento"
+    "groupTitle": "03__Busca_Feedbacks_por_sentimento"
   },
   {
     "type": "post",
     "url": "/feedbacks",
     "title": "",
     "name": "Post",
-    "group": "4__Inclui_novo_Feedback",
+    "group": "04__Inclui_novo_Feedback",
     "success": {
       "fields": {
         "Success 200": [
@@ -330,14 +330,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "4__Inclui_novo_Feedback"
+    "groupTitle": "04__Inclui_novo_Feedback"
   },
   {
     "type": "put",
     "url": "/feedbacks/:id",
     "title": "",
     "name": "UpdateFeedback",
-    "group": "5__Atualiza_Feedback",
+    "group": "05__Atualiza_Feedback",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -415,14 +415,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "5__Atualiza_Feedback"
+    "groupTitle": "05__Atualiza_Feedback"
   },
   {
     "type": "delete",
     "url": "/feedbacks/:id",
     "title": "",
     "name": "DeleteFeedback",
-    "group": "6__Exclui_Feedback",
+    "group": "06__Exclui_Feedback",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -447,14 +447,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/feedbacksRoute.js",
-    "groupTitle": "6__Exclui_Feedback"
+    "groupTitle": "06__Exclui_Feedback"
   },
   {
     "type": "post",
     "url": "/feedbacks/usuarios",
     "title": "",
     "name": "Post",
-    "group": "7__Cadastro_de_senha_para_usuario",
+    "group": "07__Cadastro_de_senha_para_usuario",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -490,7 +490,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "_id",
-            "description": "<p>ID do banco de dados MongoDB</p>"
+            "description": "<p>ID do usuario</p>"
           },
           {
             "group": "Success 200",
@@ -532,14 +532,14 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/usuariosRoute.js",
-    "groupTitle": "7__Cadastro_de_senha_para_usuario"
+    "groupTitle": "07__Cadastro_de_senha_para_usuario"
   },
   {
     "type": "auth",
     "url": "/feedbacks/auth",
     "title": "",
     "name": "authMiddleware",
-    "group": "8__Autenticacao_de_usuario",
+    "group": "08__Autenticacao_de_usuario",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -582,6 +582,96 @@ define({ "api": [
     },
     "version": "0.0.0",
     "filename": "src/routes/usuariosRoute.js",
-    "groupTitle": "8__Autenticacao_de_usuario"
+    "groupTitle": "08__Autenticacao_de_usuario"
+  },
+  {
+    "type": "get",
+    "url": "/usuarios",
+    "title": "",
+    "name": "getUsuarios",
+    "group": "09__Buscar_Usuarios_cadastrados",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>ID do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "nome",
+            "description": "<p>Nome do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "senha",
+            "description": "<p>Senha criptografada do usuario</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "createdAt",
+            "description": "<p>Data de quando a senha foi criada</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n \"_id\": \"5df3afd6951a08341830489e\",\n \"nome\": \"Jennifer Mardegan\",\n \"email\": \"jennifer_mardegan@hotmail.com\",\n \"senha\": \"$2a$10$Nhs2GquEHPp/kcP/NDu.d.ZgBEVcHVeGVtR0MIGTWL1eBZa4sGYwe\",\n \"createdAt\": \"2019-12-13T15:35:50.283Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/usuariosRoute.js",
+    "groupTitle": "09__Buscar_Usuarios_cadastrados"
+  },
+  {
+    "type": "delete",
+    "url": "/usuarios/:id",
+    "title": "",
+    "name": "deleteUsuario",
+    "group": "10__Deleter_usuario_por_ID",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "_id",
+            "description": "<p>Id do Usuário</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "\n{\n   \"mensagem\": \"Usuário removido com sucesso!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/usuariosRoute.js",
+    "groupTitle": "10__Deleter_usuario_por_ID"
   }
 ] });
