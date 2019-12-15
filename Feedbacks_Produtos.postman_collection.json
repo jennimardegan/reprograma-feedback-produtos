@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "7fd5200b-40c0-41be-9007-ae5ee9f00e3b",
+		"name": "Feedbacks_Produtos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Feedbacks.BuscarTodos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1NzYyODk2MDUsImV4cCI6MTU3NjU0ODgwNX0._jgi55D1guxKpJBDrFzZXL41CgvS844J2d6UifpfrBc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \t\"email\": \"josezanf@hotmail.com\",\r\n \t\"senha\": \"654321\"\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feedbacks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedbacks.BuscarPorId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/feedbacks/5ddd541cf1850b51d8ed74ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks",
+						"5ddd541cf1850b51d8ed74ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedbacks.BuscarPorSentimento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/feedbacks/sentimento/tristeza",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks",
+						"sentimento",
+						"tristeza"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedbacks.Incluir",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/feedbacks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedbacks.AlterarPorId",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"sentimentos\": [\"alegria\", \"confiança\", \"analitico\", \"triste\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/feedbacks/5ddd541cf1850b51d8ed74ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks",
+						"5ddd541cf1850b51d8ed74ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Feedbacks.DeletarPorId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/feedbacks/5ddd541cf1850b51d8ed74ca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"feedbacks",
+						"5ddd541cf1850b51d8ed74ca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios.BuscarTodos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios.Incluir",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios.TokenAcesso",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"josezanf@hotmail.com\",\n\t\"senha\": \"654321\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/usuarios/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Usuarios.DeletarPorId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/usuarios/5df444a5d2d75348d84a2db1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"usuarios",
+						"5df444a5d2d75348d84a2db1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
